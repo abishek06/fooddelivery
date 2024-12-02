@@ -24,6 +24,15 @@
 2. useEffect syntax - useEffect(()=>{},[]);
 3. useState syntax - useState();
 
+# React Routing
+
+1. npm install react-router-dom@version
+2. createBrowserRouter syntax => createBrowserRouter([{path,element,children[],error}]),
+3. ReactProvider to add createBrowserRouter <ReactProvider router ={createBrowserRouter}>
+4. Link to is use to set routing
+5. useParams is use to fetch params from url
+6. Outlet from react-router-dom when children is present it will be overridden when child is appended
+
 # Errors Faced
 
 1. Cannot find module 'react'
