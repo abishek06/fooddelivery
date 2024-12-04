@@ -23,6 +23,7 @@
 1. useState, useEffects - state management techniques should be binded within component
 2. useEffect syntax - useEffect(()=>{},[]);
 3. useState syntax - useState();
+4. Custom Hooks
 
 # React Routing
 
@@ -32,8 +33,20 @@
 4. Link to is use to set routing
 5. useParams is use to fetch params from url
 6. Outlet from react-router-dom when children is present it will be overridden when child is appended
+7. Lazy Loading, Suspence, fallback
+
+# Class Based Components
+
+1. class className extends React.Component
+2. super(props)
+3. constructor followed by render
+4. Life Cycle of class based componentdidMount, componentdidUpdate, componentwillUnMount
 
 # Errors Faced
 
 1. Cannot find module 'react'
    Solution : Remove node modules and try to do npm install in cmd/Terminal
+
+# Concept Learned
+
+1. flat() -> javascript array method, creates new array with sub array concatenated.

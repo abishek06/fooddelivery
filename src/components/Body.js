@@ -3,6 +3,8 @@ import resList from "../utils/resData.js";
 import RestaurantCard from "./RestaurantCard.js";
 import { SWIGGY_URL } from "../utils/constant.js";
 import Shimmer from "./Shimmer.js";
+import { Link } from "react-router-dom";
+import RestaurantMenu from "./RestaurantMenu.js";
 
 const Body = () => {
   const [listOfRestaurant, setListOfRestaurant] = useState([]);
@@ -10,7 +12,6 @@ const Body = () => {
   const [searchText, setSearchText] = useState("");
 
   useEffect(() => {
-    console.log("Use Effect called");
     fetchData();
   }, []);
 
@@ -22,7 +23,6 @@ const Body = () => {
     for (let i = 0; i < cards.length; i++) {
       var card = cards[i].card.card;
       if (listOfRestaurant != null && card?.id == "restaurant_grid_listing") {
-        console.log(card.gridElements.infoWithStyle.restaurants);
         setListOfRestaurant(card?.gridElements?.infoWithStyle?.restaurants);
         setfilteredRestaurant(card?.gridElements?.infoWithStyle?.restaurants);
       }
@@ -33,50 +33,57 @@ const Body = () => {
     <Shimmer />
   ) : (
     <div className="body">
-      <div className="filter">
-        <div className="search">
+      <div className="filter flex">
+        <div className="search m-4 p-4">
           <input
             type="text"
-            className="search-box"
+            className="border border-solid border-black"
             value={searchText}
             onChange={(e) => {
               setSearchText(e.target.value);
-              console.log("The length is " + e.target.length);
+
               if (e.target.value.length === 0)
                 setfilteredRestaurant(listOfRestaurant);
             }}
           ></input>
+
+          <button
+            className="px-4 py-2 bg-green-100 m-4 rounded-lg"
+            onClick={() => {
+              const filterData = listOfRestaurant.filter((res) => {
+                return res.info.name
+                  .toLowerCase()
+                  .includes(searchText.toLowerCase());
+              });
+              setfilteredRestaurant(filterData);
+            }}
+          >
+            Search Restaurant
+          </button>
         </div>
-        <button
-          className="btn-search"
-          onClick={() => {
-            console.log("The search text is " + searchText);
-            const filterData = listOfRestaurant.filter((res) => {
-              return res.info.name
-                .toLowerCase()
-                .includes(searchText.toLowerCase());
-            });
-            setfilteredRestaurant(filterData);
-          }}
-        >
-          Search Restaurant
-        </button>
-        <button
-          className="btn-filter"
-          onClick={() => {
-            const filteredList = listOfRestaurant.filter(
-              (res) => res.info.avgRating > 4.5
-            );
-            setfilteredRestaurant(filteredList);
-          }}
-        >
-          Top Rated Restaurant
-        </button>
+        <div className="search m-4 p-4 flex items-center">
+          <button
+            className="px-4 py-2 bg-gray-100 rounded-lg"
+            onClick={() => {
+              const filteredList = listOfRestaurant.filter(
+                (res) => res.info.avgRating > 4.5
+              );
+              setfilteredRestaurant(filteredList);
+            }}
+          >
+            Top Rated Restaurant
+          </button>
+        </div>
       </div>
 
-      <div className="res-container">
+      <div className="flex flex-wrap">
         {filteredRestaurant.map((restaurant) => (
-          <RestaurantCard key={restaurant.info.id} resData={restaurant} />
+          <Link
+            to={"/restaurantmenu/" + restaurant?.info.id}
+            key={restaurant.info.id}
+          >
+            <RestaurantCard resData={restaurant} />
+          </Link>
         ))}
       </div>
     </div>

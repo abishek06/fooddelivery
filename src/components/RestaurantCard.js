@@ -1,7 +1,6 @@
 import { IMAGE_URL } from "../utils/constant";
 
 const RestaurantCard = (props) => {
-  console.log(props);
   const { resData } = props;
 
   /* const {
@@ -14,7 +13,7 @@ const RestaurantCard = (props) => {
   } = resData?.data; */
 
   return (
-    <div className="res-card">
+    <div className="m-4 p-4 w-[250px] rounded-lg bg-gray-100 hover:bg-gray-200">
       <h4>
         <img
           className="imgsrc"
