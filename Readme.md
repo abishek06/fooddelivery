@@ -42,6 +42,13 @@
 3. constructor followed by render
 4. Life Cycle of class based componentdidMount, componentdidUpdate, componentwillUnMount
 
+# Other React Concepts
+
+1. Higher Order Components
+2. Custom hooks
+3. userContext to use value across application
+4. react-redux how fetching & inserting value
+
 # Errors Faced
 
 1. Cannot find module 'react'

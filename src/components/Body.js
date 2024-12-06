@@ -5,11 +5,14 @@ import { SWIGGY_URL } from "../utils/constant.js";
 import Shimmer from "./Shimmer.js";
 import { Link } from "react-router-dom";
 import RestaurantMenu from "./RestaurantMenu.js";
+import { withPromotedLabel } from "./RestaurantCard.js";
 
 const Body = () => {
   const [listOfRestaurant, setListOfRestaurant] = useState([]);
   const [filteredRestaurant, setfilteredRestaurant] = useState([]);
   const [searchText, setSearchText] = useState("");
+
+  const RestaurantWithPromoted = withPromotedLabel(RestaurantCard);
 
   useEffect(() => {
     fetchData();
@@ -82,7 +85,11 @@ const Body = () => {
             to={"/restaurantmenu/" + restaurant?.info.id}
             key={restaurant.info.id}
           >
-            <RestaurantCard resData={restaurant} />
+            {restaurant.info.isOpen ? (
+              <RestaurantWithPromoted resData={restaurant} />
+            ) : (
+              <RestaurantCard resData={restaurant} />
+            )}
           </Link>
         ))}
       </div>
